@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Travel, Photos, Gourmet, Living And Beyond ...">
+<meta name="viewport" content="width=device-width">
+<title>ReneWangritte</title>
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<!-- bokeh css --><link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.6.min.css" rel="stylesheet" type="text/css">
+<!-- for BokehJS --><script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.js"></script><script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.6.min.js"></script><meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+<link rel="canonical" href="http://renewang.github.io/blog/">
+<link rel="next" href="index-15.html" type="text/html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]-->
+</head>
+<body class="nav-closed">
+    
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+            <a href="../land_of_plenty/">Land Of Plenty</a>
+        </li>
+        <li class="nav-opened nav-current" role="presentation">
+            <a href=".">Life in Mandarin</a>
+        </li>
+        <li class="nav-opened" role="presentation">
+            <a href="archive.html">Archive</a>
+        </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
+
+    <div class="site-wrapper">
+                <header class="main-header" style="background-image:
+                url(../assets/img/cropped-07f93-dsc00813.jpg)"><nav class="main-nav overlay clearfix"><a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+            </nav><div class="vertical">
+                <div class="main-header-content inner">
+                    <h1 class="page-title"><a href="http://renewang.github.io/">
+                        ReneWangritte</a></h1>
+                    <h2 class="page-description">Travel, Photos, Gourmet, Living And Beyond ...</h2>
+                </div>
+            </div>
+            <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+        </header><main id="content" class="content" role="main"><div class="postindex">
+
+
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="2017/07/25/level-3-shingling-minhashing-and-common-distance-measure-i.html">[Level 3] Shingling, MinHashing and Common distance measure I</a></h2>
+    </header><section class="post-excerpt"><div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>誰適合閱讀這篇文章：熟悉 Hash, Set, Tries (Prefix and Suffix Tree) 等資料結構和有志從事大量資料分析的電腦工程師</p>
+<p>主要解決問題：給定一份文件，如何在網際網路的無盡文件大海中，找到相似的文件？
+主要應用：偵測剽竊 (Plagiarism)，搜尋引擎欲尋找鏡像網頁，網路購物或電影推薦系統中的協同過濾</p>
+<p>綱要：</p>
+<ol>
+<li>如何快速比較兩文件集合並提供量化結果:<br>
+ a.  如何定義相似度？<br>
+ b.  如何重新定義相似度比較問題為集合問題。 </li>
+<li>如何實現快速比較高相似度文件（第二篇)  </li>
+<li>應用相似搜尋於巨量資料: minHash and Locality-Sentive Hashing （第三篇）</li>
+<li>更多關於 Locality-Sentive Hashing （末篇）</li>
+</ol>
+<p>在閱讀這篇教學後，妳將會學到：</p>
+<ol>
+<li>現行的文獻技術中，如何定義兩文件的相似度？</li>
+<li>如何使用 Shingle 來轉換原問題為集合比較問題？</li>
+<li>如何使用 Jaccard similarity 來比較文件的相似度？</li>
+</ol>
+<p></p>
+<p class="more"><a href="2017/07/25/level-3-shingling-minhashing-and-common-distance-measure-i.html">Read more…</a></p>
+</div>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/technology.html">#Technology</a>,
+
+        <time class="post-date" datetime="2017-07-25T20:46:23+08:00">
+            2017-07-25 20:46
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2015/09/17/women-in-ted-fei-fei-li-wo-men-ru-he-jiao-dao-dian-nao-liao-jie-ying-xiang.html">[Women in TED] Fei Fei Li - 我們如何教導電腦瞭解影像</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<table class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;" cellspacing="0" cellpadding="0" align="center"><tbody>
+<tr>
+<td style="text-align:center;"><a style="margin-left:auto;margin-right:auto;" href="../2015/09/19f04-fei-fei-li-ted2015-bh.jpg"><img src="https://renewangtw.files.wordpress.com/2015/09/19f04-fei-fei-li-ted2015-bh.jpg?w=300" alt="" width="640" height="426" border="0"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:xx-small;"><span style="font-family:'Andale Mono';font-stretch:normal;text-align:left;">Fei Fei Li 的 TED Talk （圖片來源： </span><span style="color:#0f00ee;font-family:'Andale Mono';font-stretch:normal;text-align:left;"><u>TED Talk</u></span><span style="font-family:'Andale Mono';font-stretch:normal;text-align:left;"> ）</span></span></td>
+</tr>
+</tbody></table>
+<p><span style="font-family:'Andale Mono';font-size:14px;font-stretch:normal;"><span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;"> 二</span>次大戰期間，於布萊切利莊園祕密從事破解德軍密碼的艾倫圖靈（Alan Turing），在戰後醉心於發展有限狀態自動機械的抽象數學模型。同時能將數學符號與繁瑣的計算驟在腦中呈現的他，反覆思索自動機械的潛能，多少白晝和深夜的冥想思索，他將思考的結晶發表成計算機制和智慧（Computing Machinery and Intelligence）一文，在文中更提出了著名的圖靈測試，作為判斷計算機械是否能擁有智慧的準繩。這個問題，對於當時，需要以將近一個空房來放置一臺電腦，經常要動員好幾十位程序員進行穿孔和裝換紙帶的工作，方能編寫數行程式碼。機械能夠思考，似乎難以想像。但是對於圖靈，以及他所執筆一系列關於自動有限狀態機械的理論論文，文中獨特的視野和無邊的想像，再以抽象數學表達和理性邏輯論述，對未來的智慧機械勾勒出了遠景和藍圖。甚而，為了避免全面定義智慧這樣複雜而又模糊的概念，他提議以一種”模仿遊戲”（imitating game）來回答”機械是否擁有智慧”這個大哉問。</span><br></p>
+<p class="more"><a href="2015/09/17/women-in-ted-fei-fei-li-wo-men-ru-he-jiao-dao-dian-nao-liao-jie-ying-xiang.html">Read more…</a></p>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/technology.html">#Technology</a>,
+
+        <time class="post-date" datetime="2015-09-17T12:55:00+08:00">
+            2015-09-17 12:55
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2015/05/24/chickenosaurus-ge-lan-bo-shi-de-zhu-luo-ji-gong-yuan.html">[Chickenosaurus] 格蘭博士的侏羅"雞"公園</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<div class="ennote" style="-webkit-line-break:after-white-space;word-wrap:break-word;">
+<div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="../2015/05/e9aec-5e1566e42e673528d13570e63ae6ef14-784150.jpeg" style="margin-left:auto;margin-right:auto;"><img alt="" border="0" height="422" id="BLOGGER_PHOTO_ID_6152462417531554290" src="https://renewangtw.files.wordpress.com/2015/05/e9aec-5e1566e42e673528d13570e63ae6ef14-784150.jpeg?w=300" width="640"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="text-align:left;"><span style="font-size:x-small;">圖片左方身穿橘色襯衫的就是電影侏羅紀公園中的顧問也是故事中格蘭博士的原型。和 Smithsonian’s 自然歷史博物館的館長開懷大笑，難道是活生生的恐龍即將誕生了嗎？（圖片來源：華盛頓郵報）</span></span></td>
+</tr>
+</tbody></table>
+</div>
+<p><span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">  當</span>電影侏羅紀公園剛推出的時候，我和許多的恐龍迷一般對於電影中利用琥珀內的古蚊子所保存恐龍的 <a href="http://zh.wikipedia.org/wiki/%E8%84%B1%E6%B0%A7%E6%A0%B8%E7%B3%96%E6%A0%B8%E9%85%B8">DNA （去氧核醣核酸）</a>，並進而讓恐龍重生一樣的興奮。試著幻想這樣的場景，有著長脖子的雷龍，優雅的漫步在原始的草原上，三角龍為了一得美女的芳心，而相互卯足全力較勁，翼手龍在空中盤旋，警告著粗魯的不速之客暴龍，正準備闖入大家平靜的生活。這些在現在看來似乎是神話般的場景，似乎得以藉由在琥珀中封存的基因物質，而有了重現的機會。然而，我和許多恐龍迷一樣，當得知就算在現實生活中能找到剛對恐龍飽餐一頓後，卻不幸跌入琥珀中，成為將恐龍遺傳物質完整不缺的保存，蚊子歷史傳說中的木乃伊，也因為數量過於微小，無法讓恐龍的基因充分表現，而讓恐龍生龍活虎，而感到失落。  <br></p>
+<p class="more"><a href="2015/05/24/chickenosaurus-ge-lan-bo-shi-de-zhu-luo-ji-gong-yuan.html">Read more…</a></p>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/technology.html">#Technology</a>,
+
+        <time class="post-date" datetime="2015-05-24T23:49:00+08:00">
+            2015-05-24 23:49
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2015/02/16/islamophobia-gei-cha-li-shi-qu-de-huan-you-reng-ran-huo-zhu-de.html">[Islamophobia] 給查理，逝去的還有仍然活著的</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="../2015/02/eb211-35754dab73b2df5a.jpg" style="margin-left:auto;margin-right:auto;"><img border="0" src="../2015/02/eb211-35754dab73b2df5a.jpg" height="360" width="640"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:x-small;">我相信你，你相信我嗎？請給我一個擁抱（<a href="http://world.yam.com/post.php?id=3357" target="_blank">圖片來源</a>）</span></td>
+</tr>
+</tbody></table>
+<p><span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">一</span>個人在家時，或許是喜歡電視裡熱絡的氣氛，讓我跟世界又有了連結，莫名養成了電視新聞配午飯的習慣。今日一如往常，打開電視，先是總吵吵鬧鬧，靠評論政治人物維生的名嘴們，仍是喋喋不休，臆測和總統大選有緋聞的一干政治人物的真正居心。我對這種信口拈來毫無根據的說詞，不感興趣，便轉到新聞台，赫然發現伊斯蘭國又公佈最新一批斬首囚犯的錄影帶。<br></p>
+<p class="more"><a href="2015/02/16/islamophobia-gei-cha-li-shi-qu-de-huan-you-reng-ran-huo-zhu-de.html">Read more…</a></p>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/news.html">#News</a>,
+
+        <time class="post-date" datetime="2015-02-16T22:49:00+08:00">
+            2015-02-16 22:49
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2014/09/29/science-hou-gong-zhen-huan-chuan-he-hai-shi-zhi-jian-de-guan-xi.html">[Science] 後宮甄環傳和海獅之間的關係</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="https://draft.blogger.com/blogger.g?blogID=258425772982914371" style="margin-left:auto;margin-right:auto;"><img alt="Zalophus californianus at Moss Landing 3.jpg" src="../2014/09/f6bd8-zalophus_californianus_at_moss_landing_3.jpg" height="425" width="640"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:x-small;"><span style="text-align:left;">成群的海獅</span><span style="text-align:left;">圖片出處：</span><span style="text-align:left;">“</span><a href="http://commons.wikimedia.org/wiki/File:Zalophus_californianus_at_Moss_Landing_3.jpg#mediaviewer/File:Zalophus_californianus_at_Moss_Landing_3.jpg" style="text-align:left;">Zalophus californianus at Moss Landing 3</a><span style="text-align:left;">” by </span><a class="external text" href="https://sites.google.com/site/thebrockeninglory/" rel="nofollow" style="text-align:left;">Brocken Inaglory</a><span style="text-align:left;"> - </span><span class="int-own-work" style="text-align:left;">Own work</span><span style="text-align:left;">. Licensed under </span><a href="http://creativecommons.org/licenses/by-sa/3.0" style="text-align:left;" title="Creative Commons Attribution-Share Alike 3.0-2.5-2.0-1.0">CC BY-SA 3.0</a><span style="text-align:left;"> via </span><a href="https://commons.wikimedia.org/wiki/" style="text-align:left;">Wikimedia Commons</a></span></td>
+</tr>
+</tbody></table>
+<p><span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">海</span> 獅其實是這樣進入後宮甄環傳裡的。一天晚上，我和母親大人在電視前面觀看公視的生態節目。生態節目裡正好介紹年輕的公海獅，覬覦岸上成群的母海獅，伺機想找機會交配。無奈這群龐大的母海獅們，數量可能超過數十隻，都屬於一隻（沒錯！是一隻！）成年的公海獅。為了不想被成年公海獅海扁一頓，沒實力的年輕海獅，只好在海灘外的淺海域徘徊，希望逮到成年公海獅失神的時刻，偷偷和其中一隻母海獅交配成功。</p>
+<p>我看著生態節目的介紹，突然幽幽的跟母親大人交換心得：“怎麼覺得成年公海獅有點像<a href="http://zh.wikipedia.org/wiki/%E5%BE%8C%E5%AE%AE%E7%94%84%E5%AC%9B%E5%82%B3_(%E9%9B%BB%E8%A6%96%E5%8A%87)" target="_blank">甄環傳</a>裡清朝的皇帝？”坐擁佳麗三千人的中國皇帝，多像海獅社會裡的成年海獅，為了保證自己的優勢基因能夠傳遞到下一代去，而佔據了成群的母海獅。 <br></p>
+<p class="more"><a href="2014/09/29/science-hou-gong-zhen-huan-chuan-he-hai-shi-zhi-jian-de-guan-xi.html">Read more…</a></p>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+
+        <time class="post-date" datetime="2014-09-29T01:54:00+08:00">
+            2014-09-29 01:54
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2014/04/24/taiwan-bu-yi-yang-de-lan-yang-feng-qing-wu-shi-gang-he-dao-xia-de-bo-wu-guan.html">[Taiwan] 不一樣的蘭陽風情 - 烏石港和倒下的博物館</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="https://www.flickr.com/photos/renewangsl/13953273246" style="margin-left:auto;margin-right:auto;" title="YiLan-07014.jpg by Rene Wang, on Flickr"><img alt="YiLan-07014.jpg" src="http://farm6.static.flickr.com/5314/13953273246_5f14c7cf6e_b.jpg" height="425" width="640"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:small;">烏石港的漁港風情</span></td>
+</tr>
+</tbody></table>
+<div dir="ltr" style="text-align:left;">
+<span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">在</span>  <br>充滿盆地和小山丘的臺灣北部，位於宜蘭的蘭陽平原，就像乳娘一般，以它豐沛的雨水和富碩的農產資源，蘊育著臺灣北部的城市們。不像國家首要行政區，充滿著舊蔣家政權遺留下來許多信義，博愛等官腔的名字。宜蘭的地名，保留了移民墾荒時期的特色，如頭城，蘇澳。<br><p class="more"><a href="2014/04/24/taiwan-bu-yi-yang-de-lan-yang-feng-qing-wu-shi-gang-he-dao-xia-de-bo-wu-guan.html">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/taiwan.html">#Taiwan</a>,
+                <a href="../categories/travel.html">#Travel</a>,
+
+        <time class="post-date" datetime="2014-04-24T18:13:00+08:00">
+            2014-04-24 18:13
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2014/04/12/taiwan-yu-ping-peng-cao-ping-shui-xiang-feng.html">[Taiwan] 與萍蓬草萍水相逢</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="https://www.flickr.com/photos/renewangsl/13781025124" title="Yellow-Water-Lily-08289.jpg by Rene Wang, on Flickr"><img alt="Yellow-Water-Lily-08289.jpg" height="425" src="http://farm8.static.flickr.com/7390/13781025124_b6cd2db57c_z.jpg" width="640"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:small;">這是什麼花呢？</span></td>
+</tr>
+</tbody></table>
+<p><span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">近</span>日來，在龍潭腳踏車步道與客家文化館旁，都可以看到像荷花池的小池塘裡，開地不是大而華貴的蓮花，而是這樣小而嬌嫩的黃花。本來經過時，都小黃荷花，小黃荷花這樣親切的叫著，直到有一天爸爸看到小黃荷花的照片，興奮的告訴我們，這些小黃荷花正是臺灣特有的萍蓬草，因為瀕臨絕種，所以很難在其他地方看到。<br></p>
+<p class="more"><a href="2014/04/12/taiwan-yu-ping-peng-cao-ping-shui-xiang-feng.html">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/taiwan.html">#Taiwan</a>,
+                <a href="../categories/travel.html">#Travel</a>,
+
+        <time class="post-date" datetime="2014-04-12T00:24:00+08:00">
+            2014-04-12 00:24
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2014/03/23/kyoto-guan-yu-jing-du-su-xie-zou-zai-hua-jian-xiao-lu-shang.html">[Kyoto] 關於京都速寫 - 走在花見小路上</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="http://www.flickr.com/photos/renewangsl/13343038443/" style="margin-left:auto;margin-right:auto;" title="Kyoto-05195.jpg by renewangsl, on Flickr"><img alt="Kyoto-05195.jpg" src="http://farm8.static.flickr.com/7154/13343038443_78da0d03ed_z.jpg" height="640" width="432"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:small;">祉園四条通</span></td>
+</tr>
+</tbody></table>
+<p><span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">在</span>以拍攝公路電影出名的德國導演文溫德斯的電影 – 巴黎徳州中，同樣有著旅遊意義名字的主角崔維斯（Travis），從著了火的旅行拖車驚起，全身是火的他，分不清是火燒身體的痛楚在嚴重折磨他，亦或是妻兒離棄的背離感在啃噬著他。在黑夜裡，他彷似一顆火球，一路奔跑，直到精疲力竭為止…</p>
+<p>位於京都的祉園區，名字帶有賞花意味的花見小路，其實是就是古京都花街柳巷的意思。花見小路一帶古色古香，古代日式建築上竟是風雅的松柏，盛開嬌豔的花朵卻是難得一見，想必花見這個名字，暗指的該是在從前風月場所的名花藝妓。然而很難想像這樣雅致的一條小徑，兩旁淨是從前的風月場所。</p>
+<p class="more"><a href="2014/03/23/kyoto-guan-yu-jing-du-su-xie-zou-zai-hua-jian-xiao-lu-shang.html">Read more…</a></p>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/kyoto.html">#Kyoto</a>,
+                <a href="../categories/travel.html">#Travel</a>,
+
+        <time class="post-date" datetime="2014-03-23T11:07:00+08:00">
+            2014-03-23 11:07
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2014/03/18/photos-zi-ran-de-kui-zeng.html">[Photos] 自然的餽贈</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="http://www.flickr.com/photos/renewangsl/13023945494/" style="margin-left:auto;margin-right:auto;" title="DSC07334.jpg by renewangsl, on Flickr"><img alt="DSC07334.jpg" src="http://farm4.static.flickr.com/3682/13023945494_6008615077_z.jpg" height="448" width="640"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:small;">茶花，楓葉和夕陽（好啦！我最近很著迷逆光的日系攝影風格）</span></td>
+</tr>
+</tbody></table>
+<div dir="ltr" style="text-align:left;">
+<span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">前</span>些日子，在觀看央視飲食紀錄片 – 舌尖上的中國，節目其中一段是講述在東北吉林查干湖利用冰下走網捕漁的漁夫們。利用這個技巧，再加上常年熟稔冰湖下魚的生態環境的魚把頭指導，每每撒網後的收穫都非常豐盛，漁獲幾乎都是上百隻兩公斤大的肥魚。<br><p class="more"><a href="2014/03/18/photos-zi-ran-de-kui-zeng.html">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/photos.html">#Photos</a>,
+                <a href="../categories/taiwan.html">#Taiwan</a>,
+
+        <time class="post-date" datetime="2014-03-18T21:29:00+08:00">
+            2014-03-18 21:29
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2014/03/09/taiwan-chun-ying.html">[Taiwan] 春櫻</a></h2>
+    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
+<tr>
+<td style="text-align:center;"><a href="http://www.flickr.com/photos/renewangsl/13023935554/" style="margin-left:auto;margin-right:auto;" title="DSC07324.jpg by renewangsl, on Flickr"><img alt="DSC07324.jpg" src="http://farm8.static.flickr.com/7409/13023935554_1150a2652a_z.jpg" height="640" width="425"></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align:center;"><span style="font-size:small;">逆光盛開的櫻花</span></td>
+</tr>
+</tbody></table>
+<div dir="ltr" style="text-align:left;">
+<div dir="ltr" style="text-align:left;">
+<span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">比</span>起去年專車到<a href="http://renewangtw.blogspot.tw/2013/02/taiwan.html" target="_blank">武陵賞櫻</a>，今年沒有為了要觀賞二三月盛開的粉紅櫻花而特別到什麼地方去和專程賞櫻的雅客們一起將賞櫻步道擠的水瀉不通。在龍潭自宅附近的小道上，各式各樣的櫻花就盛開的嬌美。悠閒的在山間步道，無須等待其他雅客擺著各式各樣的姿勢來和盛開的櫻花合照，徑自拿著相機對著嬌嫩的櫻花，愛照多久就照多久，可謂是熱愛攝影的人的一種享受吧！<br><p class="more"><a href="2014/03/09/taiwan-chun-ying.html">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/photos.html">#Photos</a>,
+                <a href="../categories/taiwan.html">#Taiwan</a>,
+
+        <time class="post-date" datetime="2014-03-09T15:55:00+08:00">
+            2014-03-09 15:55
+        </time></footer></article>
+</div>
+
+        <nav class="postindexpager"><ul class="pager">
+<li class="next">
+                <a href="index-15.html" rel="next">Older posts</a>
+            </li>
+        </ul></nav><script>var disqus_shortname="renewangritte";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+         processEscapes: true
+     },
+     displayAlign: 'left', // Change this to 'center' to center equations.
+     "HTML-CSS": {
+         styles: {'.MathJax_Display': {"margin": 0}}
+     }
+ });
+ </script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2017         <a href="mailto:renewangtw@gmail.com">Rene Wang</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a></section></footer>
+</div>
+    
+    <script type="text/javascript" src="../assets/js/jquery.js"></script><script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../assets/js/index.js"></script>
+</body>
+</html>
