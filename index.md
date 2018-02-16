@@ -15,7 +15,7 @@
 想知道大數據在做什麼呢？想知道電腦怎麼反過來利用隨處可得的數位資訊來進行情緒分析甚至預測股市的起落嗎？最熱門的深度學習如何與增強學習成為在圍棋界打遍天下無敵手的 AlphaGo 嗎？請前往豐饒之地 ．這是一個以英文書寫的人工智慧學習筆記和研究紀錄，目標讀者群則是偏向機械學習和人工智慧的研究者．
 
 
-### 翻滾吧！女孩！(Girls, Let's Code!)
+### [翻滾吧！駭客女孩!](https://sosreader.com/project/girlsletscode/)(Girls, Let's Code!)
 *A Female Coder's Quest for Bridging Gender Gap*
 
 > 資料分析師是 21 世紀最性感的工作
