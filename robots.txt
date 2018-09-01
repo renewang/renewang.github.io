@@ -1,4 +1,0 @@
-Sitemap: http://renewang.github.io/sitemapindex.xml
-
-User-Agent: *
-Host: renewang.github.io
