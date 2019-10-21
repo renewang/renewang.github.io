@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ReneWangritte</title><link>http://renewang.github.io/</link><description>Travel, Photos, Gourmet, Living And Beyond ...</description><atom:link href="http://renewang.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sat, 09 Dec 2017 04:32:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>[PyCon 2017] 歡樂學 Python 位元組碼(byte code)</title><link>http://renewang.github.io/blog/2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ReneWangritte</title><link>http://renewang.github.io/</link><description>Travel, Photos, Gourmet, Living And Beyond ...</description><atom:link href="http://renewang.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 21 Oct 2019 14:57:37 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>資料分析師尋常的一日：分析IMDB 資料</title><link>http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="資料分析師的尋常一日的簡短分析：IMDB-dataset"&gt;資料分析師的尋常一日的簡短分析：IMDB dataset&lt;a class="anchor-link" href="http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html#%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E5%B8%AB%E7%9A%84%E5%B0%8B%E5%B8%B8%E4%B8%80%E6%97%A5%E7%9A%84%E7%B0%A1%E7%9F%AD%E5%88%86%E6%9E%90%EF%BC%9AIMDB-dataset"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;今天要使用 python pandas 函式讀取的是 &lt;a href="https://www.imdb.com/interfaces/"&gt;IMDB 提供的 dataset&lt;/a&gt;。 在這個 dataset 中，總共有七個檔案，都用 gzip 壓縮，而分別是：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;
+&lt;th style="text-align:center"&gt;檔案名稱&lt;/th&gt;
+&lt;th style="text-align:center"&gt;簡短中文註解&lt;/th&gt;
+&lt;th style="text-align:center"&gt;是否使用     &lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.akas.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;影片的語言和地區等較為國際性的資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.basics.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;影片的基本資料，如時間和發行年代&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.crew.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括電影與人員有關，主要是導演和編劇的資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.episode.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;和電視影集相關的資訊&lt;/td&gt;
+&lt;td style="text-align:center"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.principals.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括影片較為詳細的主要工作人員資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Mo&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.ratings.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括觀眾對於影片的評價資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;name.basics.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括電影工作人員包括導演等的相關資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如表格所示，今天我們只會用到三個檔案：title.basics.tsv, title.crew.tsv 和 name.basics.tsv。&lt;/p&gt;
+&lt;p&gt;今天的分析，是想知道《從前，有個好萊塢 ..》的導演昆丁塔倫提諾，是否有拍片長度變長的趨勢。這個問題來自於光與影的&lt;a href="https://www.facebook.com/lightandshadowcinema/photos/a.953335314676769/2573460669330884"&gt;臉書貼文&lt;/a&gt;，其中提到一個關鍵是，昆丁塔倫提諾在 2010 年失去了長期合作的剪輯師後，導演的電影皆呈現冗長的傾向。&lt;/p&gt;
+&lt;p&gt;分析的流程是：先讀入檔案，找出昆丁塔倫提諾的名字代碼（name.basics.tsv），對應到角色為導演的電影（title.crew.tsv），取出電影的官方公佈時間長（title.basics.tsv），繪製昆丁塔倫提諾導演在執導期間的所有片長時間。
+&lt;/p&gt;&lt;p&gt;&lt;a href="http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html"&gt;Read more…&lt;/a&gt; (7 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Technology</category><guid>http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html</guid><pubDate>Fri, 31 Aug 2018 04:00:00 GMT</pubDate></item><item><title>[PyCon 2017] 歡樂學 Python 位元組碼(byte code)</title><link>http://renewang.github.io/blog/2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;
 
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -25,6 +78,12 @@
 &lt;div class="input"&gt;
 
 &lt;div class="inner_cell"&gt;
+
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -489,19 +548,4 @@ Coursera Mining Massive Datasets course (Ch 3-1, 3-2 and some sections from 3-5)
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div dir="ltr" style="text-align:left;"&gt;&lt;span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;"&gt;在&lt;/span&gt;  &lt;br&gt;充滿盆地和小山丘的臺灣北部，位於宜蘭的蘭陽平原，就像乳娘一般，以它豐沛的雨水和富碩的農產資源，蘊育著臺灣北部的城市們。不像國家首要行政區，充滿著舊蔣家政權遺留下來許多信義，博愛等官腔的名字。宜蘭的地名，保留了移民墾荒時期的特色，如頭城，蘇澳。&lt;br&gt;&lt;p&gt;&lt;a href="http://renewang.github.io/blog/2014/04/24/taiwan-bu-yi-yang-de-lan-yang-feng-qing-wu-shi-gang-he-dao-xia-de-bo-wu-guan.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Taiwan</category><category>Travel</category><guid>http://renewang.github.io/blog/2014/04/24/taiwan-bu-yi-yang-de-lan-yang-feng-qing-wu-shi-gang-he-dao-xia-de-bo-wu-guan.html</guid><pubDate>Thu, 24 Apr 2014 10:13:00 GMT</pubDate></item><item><title>[Taiwan] 與萍蓬草萍水相逢</title><link>http://renewang.github.io/blog/2014/04/12/taiwan-yu-ping-peng-cao-ping-shui-xiang-feng.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;div dir="ltr" style="text-align:left;"&gt;
-&lt;div dir="ltr" style="text-align:left;"&gt;
-&lt;div dir="ltr" style="text-align:left;"&gt;
-&lt;div dir="ltr" style="text-align:left;"&gt;
-&lt;div dir="ltr" style="text-align:left;"&gt;
-&lt;table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style="text-align:center;"&gt;&lt;a href="https://www.flickr.com/photos/renewangsl/13781025124" title="Yellow-Water-Lily-08289.jpg by Rene Wang, on Flickr"&gt;&lt;img alt="Yellow-Water-Lily-08289.jpg" height="425" src="http://farm8.static.flickr.com/7390/13781025124_b6cd2db57c_z.jpg" width="640"&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class="tr-caption" style="text-align:center;"&gt;&lt;span style="font-size:small;"&gt;這是什麼花呢？&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;"&gt;近&lt;/span&gt;日來，在龍潭腳踏車步道與客家文化館旁，都可以看到像荷花池的小池塘裡，開地不是大而華貴的蓮花，而是這樣小而嬌嫩的黃花。本來經過時，都小黃荷花，小黃荷花這樣親切的叫著，直到有一天爸爸看到小黃荷花的照片，興奮的告訴我們，這些小黃荷花正是臺灣特有的萍蓬草，因為瀕臨絕種，所以很難在其他地方看到。&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href="http://renewang.github.io/blog/2014/04/12/taiwan-yu-ping-peng-cao-ping-shui-xiang-feng.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Taiwan</category><category>Travel</category><guid>http://renewang.github.io/blog/2014/04/12/taiwan-yu-ping-peng-cao-ping-shui-xiang-feng.html</guid><pubDate>Fri, 11 Apr 2014 16:24:00 GMT</pubDate></item></channel></rss>
+&lt;div dir="ltr" style="text-align:left;"&gt;&lt;span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;"&gt;在&lt;/span&gt;  &lt;br&gt;充滿盆地和小山丘的臺灣北部，位於宜蘭的蘭陽平原，就像乳娘一般，以它豐沛的雨水和富碩的農產資源，蘊育著臺灣北部的城市們。不像國家首要行政區，充滿著舊蔣家政權遺留下來許多信義，博愛等官腔的名字。宜蘭的地名，保留了移民墾荒時期的特色，如頭城，蘇澳。&lt;br&gt;&lt;p&gt;&lt;a href="http://renewang.github.io/blog/2014/04/24/taiwan-bu-yi-yang-de-lan-yang-feng-qing-wu-shi-gang-he-dao-xia-de-bo-wu-guan.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Taiwan</category><category>Travel</category><guid>http://renewang.github.io/blog/2014/04/24/taiwan-bu-yi-yang-de-lan-yang-feng-qing-wu-shi-gang-he-dao-xia-de-bo-wu-guan.html</guid><pubDate>Thu, 24 Apr 2014 10:13:00 GMT</pubDate></item></channel></rss>

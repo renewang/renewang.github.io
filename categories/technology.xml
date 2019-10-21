@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ReneWangritte (Posts about Technology)</title><link>http://renewang.github.io/</link><description></description><atom:link href="http://renewang.github.io/categories/technology.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sat, 09 Dec 2017 04:32:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>[PyCon 2017] 歡樂學 Python 位元組碼(byte code)</title><link>http://renewang.github.io/blog/2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ReneWangritte (Posts about Technology)</title><link>http://renewang.github.io/</link><description></description><atom:link href="http://renewang.github.io/categories/technology.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 21 Oct 2019 14:57:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>資料分析師尋常的一日：分析IMDB 資料</title><link>http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="資料分析師的尋常一日的簡短分析：IMDB-dataset"&gt;資料分析師的尋常一日的簡短分析：IMDB dataset&lt;a class="anchor-link" href="http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html#%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E5%B8%AB%E7%9A%84%E5%B0%8B%E5%B8%B8%E4%B8%80%E6%97%A5%E7%9A%84%E7%B0%A1%E7%9F%AD%E5%88%86%E6%9E%90%EF%BC%9AIMDB-dataset"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;今天要使用 python pandas 函式讀取的是 &lt;a href="https://www.imdb.com/interfaces/"&gt;IMDB 提供的 dataset&lt;/a&gt;。 在這個 dataset 中，總共有七個檔案，都用 gzip 壓縮，而分別是：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;
+&lt;th style="text-align:center"&gt;檔案名稱&lt;/th&gt;
+&lt;th style="text-align:center"&gt;簡短中文註解&lt;/th&gt;
+&lt;th style="text-align:center"&gt;是否使用     &lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.akas.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;影片的語言和地區等較為國際性的資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.basics.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;影片的基本資料，如時間和發行年代&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.crew.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括電影與人員有關，主要是導演和編劇的資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.episode.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;和電視影集相關的資訊&lt;/td&gt;
+&lt;td style="text-align:center"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.principals.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括影片較為詳細的主要工作人員資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Mo&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;title.ratings.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括觀眾對於影片的評價資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:center"&gt;name.basics.tsv.gz&lt;/td&gt;
+&lt;td style="text-align:center"&gt;包括電影工作人員包括導演等的相關資料&lt;/td&gt;
+&lt;td style="text-align:center"&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如表格所示，今天我們只會用到三個檔案：title.basics.tsv, title.crew.tsv 和 name.basics.tsv。&lt;/p&gt;
+&lt;p&gt;今天的分析，是想知道《從前，有個好萊塢 ..》的導演昆丁塔倫提諾，是否有拍片長度變長的趨勢。這個問題來自於光與影的&lt;a href="https://www.facebook.com/lightandshadowcinema/photos/a.953335314676769/2573460669330884"&gt;臉書貼文&lt;/a&gt;，其中提到一個關鍵是，昆丁塔倫提諾在 2010 年失去了長期合作的剪輯師後，導演的電影皆呈現冗長的傾向。&lt;/p&gt;
+&lt;p&gt;分析的流程是：先讀入檔案，找出昆丁塔倫提諾的名字代碼（name.basics.tsv），對應到角色為導演的電影（title.crew.tsv），取出電影的官方公佈時間長（title.basics.tsv），繪製昆丁塔倫提諾導演在執導期間的所有片長時間。
+&lt;/p&gt;&lt;p&gt;&lt;a href="http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html"&gt;Read more…&lt;/a&gt; (7 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Technology</category><guid>http://renewang.github.io/blog/2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html</guid><pubDate>Fri, 31 Aug 2018 04:00:00 GMT</pubDate></item><item><title>[PyCon 2017] 歡樂學 Python 位元組碼(byte code)</title><link>http://renewang.github.io/blog/2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;
 
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -25,6 +78,12 @@
 &lt;div class="input"&gt;
 
 &lt;div class="inner_cell"&gt;
+
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -459,12 +518,4 @@ Coursera Mining Massive Datasets course (Ch 3-1, 3-2 and some sections from 3-5)
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;div class="separator" style="clear:both;text-align:center;"&gt;&lt;/div&gt;
-&lt;div dir="ltr" style="text-align:left;"&gt;&lt;span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;"&gt;曾&lt;/span&gt;經在動感小帆的部落格裡，讀到小帆在非洲盧安達和剛果邊境旅遊，筆電和手機在旅舍內&lt;a href="http://blog.dcview.com/article.php?a=AD5TNQxoVmZWNw%3D%3D" target="_blank"&gt;被偷的文章&lt;/a&gt;。文中除了對小帆豁達開朗的個性感到欽佩，不禁也開始對旅遊中可能會攜帶的貴重物品的安危感到憂心。尤其，前一陣子查詢西班牙大城市的旅遊資訊，閱讀到有些受害者的親身經歷，談到竊賊會明目張膽在光天化日之下動手搶奪旅客還懸掛在脖子上的相機，除了對這些竊賊枉顧法紀的囂張行為瞠目結舌，更開始憂心若是有朝一日，於旅途中遺失了已經認真服務我超過兩個年頭的數位單眼相機 Sony NEX 5N，那該會是有多讓人傷心的事呀！&lt;br&gt;&lt;p&gt;&lt;a href="http://renewang.github.io/blog/2014/02/10/photos-a-xiang-ji-bei-tou-la-mei-guan-xi-shang-wang-zhao-zhao-kan-lenstag-com.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Photos</category><category>Technology</category><guid>http://renewang.github.io/blog/2014/02/10/photos-a-xiang-ji-bei-tou-la-mei-guan-xi-shang-wang-zhao-zhao-kan-lenstag-com.html</guid><pubDate>Mon, 10 Feb 2014 13:07:00 GMT</pubDate></item><item><title>[Artificial Intelligence] 我要變成小男孩!</title><link>http://renewang.github.io/blog/2010/10/16/artificial-intelligence-wo-yao-bian-cheng-xiao-nan-hai.html</link><dc:creator>Rene Wang</dc:creator><description>&lt;p&gt;&lt;a href="http://renewang.github.io/2010/10/0ea81-fuitsu-bear-rm-eng-600.jpg"&gt;&lt;img alt="" border="0" src="https://renewangtw.files.wordpress.com/2010/10/0ea81-fuitsu-bear-rm-eng-600.jpg?w=300" id="BLOGGER_PHOTO_ID_5526306738449289890"&gt;&lt;/a&gt;
-&lt;/p&gt;&lt;div style="text-align:center;"&gt;(Original Photo and Text from Engadget:&lt;br&gt;&lt;a href="http://www.engadget.com/2010/10/05/fujitsus-social-robot-bear-is-the-supertoy-of-kubricks-dreams/"&gt;Fujitsu’s social robot bear is the supertoy of Kubrick’s dreams, almost&lt;/a&gt;)
-&lt;div style="text-align:left;"&gt;這款由富士通發表的機械熊，毛絨絨逗人喜愛的樣子有別於好些年前新力發表的機械狗 — &lt;a href="http://en.wikipedia.org/wiki/AIBO"&gt;Aibo&lt;/a&gt;。Aibo 金屬感現代化的外表，能像真實的狗一樣遊戲，頑皮地探索環境，甚至能執行簡單的指令。到了這款療傷系的機械熊，活生生就像電影  Artificial Intelligence: AI 裡的 Teddy 3000 的翻版，相當注重與人互動的功能，是居家生活的好夥伴。據 Engadget 的記者報導，這款玩具熊在可愛的鼻子裡裝了一個相機 ，能動態捕捉影像並加以辨識，全身上下有12個致動器，13個皮膚及手握感應器，能夠執行約300個動作。所以這些可愛的玩具熊們能向你招手，和我們一起向人群招手，和我們一起開懷大笑，或是因為無聊而漸漸進入夢鄉。
-&lt;p&gt;而差不多在今年年中，微軟公司也在 TED 發表一款新的養成遊戲的 Demo [見延伸閱讀]，捨棄了以往用電腦時，採用的冷冰冰滑鼠和鍵盤的輸入方式，主要是藉由微軟公司發展的最新人機互動的技術(Kinect)來操作，簡單的說，就是你的手，你的身體和聲音。遊戲的內容是教導影響一個11歲大的小男孩，Milo，他剛搬到新家，尚未交到任何的朋友，和許多要進入青春期的孩子相同，有些叛逆，有些心事和煩惱，需要玩家陪他遊戲和逗他開心。在 TED 的影片中，主要 Demo 三個遊戲片段，玩家可以用手，身體和對話與 Milo 互動。其中之一，便是陪著 Milo 探索花園，在這時玩家所要做的事則是用手指出螢幕中蝸牛的位置。影片中還提到，遊戲還有個貼心的設計，會隨著玩家的性別的不同，Milo 會決定去花園搜尋蝸牛還是蝴蝶 (因為，他們發現女孩較痛恨蝸牛 !)。另外一個，則是教導 Milo 打水漂兒，為了達成這個目的 Kinect 必須能辨識玩家全身的動作，在影片中提到，女性玩家大多展現較多的耐心和母性，而男性玩家則競爭性較強，甚至想贏過才11歲大的Milo。&lt;/p&gt;
-&lt;p&gt;這兩款玩具和遊戲，或許都呈現了現代人空虛，需要 有’人'作伴，心靈想和外界有所聯繫的心理。而，或許在某種程度上，我們把現代人社交的焦慮感投射在發明上，賦予機械智慧，這樣我們就能任意地程式設計改變他們，而不會嚐到被拒絕的苦楚。又或許，是出於對現實的不滿足感和失望，就好似電影 AI 裡，David 的母親，因為自己的孩子癱瘓而成為植物人，在父親的好意下，而決定認養David–這個人工智慧下的產物。在強烈的母性驅使下，如果不是手足之間的競爭，母親不僅能對 David 付出對等的母愛，甚至於視如己出般的溺愛。這樣一個電影片段，帶著些許的暗示，”愛”這樣的行為，有可能只是自我心靈的投影，對像可能不再侷限於對自己的伴侶，家人或族群，更有可能延伸至無生命的個體上。而當這些無生命，有一天當有了自己的自由意識，生命的定義或許也要重新改寫了。&lt;/p&gt;
-&lt;p&gt;或許，有一天會像電影 AI，小熊們和虛擬男孩 Milo 也會進行小小的罷工，開始展開找尋藍仙女的旅程，因為有朝一日，他們也想站在藍仙女面前，許著變成小男孩的願望!&lt;/p&gt;
-&lt;p&gt;延伸閱讀:&lt;br&gt;&lt;a href="http://www.ted.com/talks/view/id/932"&gt;Meet Milo, the virtual boy: Peter Molyneux &lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-</description><category>movie</category><category>Technology</category><guid>http://renewang.github.io/blog/2010/10/16/artificial-intelligence-wo-yao-bian-cheng-xiao-nan-hai.html</guid><pubDate>Sat, 16 Oct 2010 03:36:00 GMT</pubDate></item></channel></rss>
+&lt;div dir="ltr" style="text-align:left;"&gt;&lt;span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;"&gt;曾&lt;/span&gt;經在動感小帆的部落格裡，讀到小帆在非洲盧安達和剛果邊境旅遊，筆電和手機在旅舍內&lt;a href="http://blog.dcview.com/article.php?a=AD5TNQxoVmZWNw%3D%3D" target="_blank"&gt;被偷的文章&lt;/a&gt;。文中除了對小帆豁達開朗的個性感到欽佩，不禁也開始對旅遊中可能會攜帶的貴重物品的安危感到憂心。尤其，前一陣子查詢西班牙大城市的旅遊資訊，閱讀到有些受害者的親身經歷，談到竊賊會明目張膽在光天化日之下動手搶奪旅客還懸掛在脖子上的相機，除了對這些竊賊枉顧法紀的囂張行為瞠目結舌，更開始憂心若是有朝一日，於旅途中遺失了已經認真服務我超過兩個年頭的數位單眼相機 Sony NEX 5N，那該會是有多讓人傷心的事呀！&lt;br&gt;&lt;p&gt;&lt;a href="http://renewang.github.io/blog/2014/02/10/photos-a-xiang-ji-bei-tou-la-mei-guan-xi-shang-wang-zhao-zhao-kan-lenstag-com.html"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Photos</category><category>Technology</category><guid>http://renewang.github.io/blog/2014/02/10/photos-a-xiang-ji-bei-tou-la-mei-guan-xi-shang-wang-zhao-zhao-kan-lenstag-com.html</guid><pubDate>Mon, 10 Feb 2014 13:07:00 GMT</pubDate></item></channel></rss>

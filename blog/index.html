@@ -19,7 +19,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://renewang.github.io/blog/">
-<link rel="next" href="index-16.html" type="text/html">
+<link rel="next" href="index-14.html" type="text/html">
 <!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]-->
 </head>
 <body class="nav-closed">
@@ -59,7 +59,75 @@
         </header><main id="content" class="content" role="main"><div class="postindex">
 
 
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html">[PyCon 2017] 歡樂學 Python 位元組碼(byte code)</a></h2>
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html">資料分析師尋常的一日：分析IMDB 資料</a></h2>
+    </header><section class="post-excerpt"><div class="cell border-box-sizing text_cell rendered">
+
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="資料分析師的尋常一日的簡短分析：IMDB-dataset">資料分析師的尋常一日的簡短分析：IMDB dataset<a class="anchor-link" href="2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html#%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E5%B8%AB%E7%9A%84%E5%B0%8B%E5%B8%B8%E4%B8%80%E6%97%A5%E7%9A%84%E7%B0%A1%E7%9F%AD%E5%88%86%E6%9E%90%EF%BC%9AIMDB-dataset">¶</a>
+</h2>
+<p>今天要使用 python pandas 函式讀取的是 <a href="https://www.imdb.com/interfaces/">IMDB 提供的 dataset</a>。 在這個 dataset 中，總共有七個檔案，都用 gzip 壓縮，而分別是：</p>
+<table>
+<thead><tr>
+<th style="text-align:center">檔案名稱</th>
+<th style="text-align:center">簡短中文註解</th>
+<th style="text-align:center">是否使用     </th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center">title.akas.tsv.gz</td>
+<td style="text-align:center">影片的語言和地區等較為國際性的資料</td>
+<td style="text-align:center">No</td>
+</tr>
+<tr>
+<td style="text-align:center">title.basics.tsv.gz</td>
+<td style="text-align:center">影片的基本資料，如時間和發行年代</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">title.crew.tsv.gz</td>
+<td style="text-align:center">包括電影與人員有關，主要是導演和編劇的資料</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">title.episode.tsv.gz</td>
+<td style="text-align:center">和電視影集相關的資訊</td>
+<td style="text-align:center">No</td>
+</tr>
+<tr>
+<td style="text-align:center">title.principals.tsv.gz</td>
+<td style="text-align:center">包括影片較為詳細的主要工作人員資料</td>
+<td style="text-align:center">Mo</td>
+</tr>
+<tr>
+<td style="text-align:center">title.ratings.tsv.gz</td>
+<td style="text-align:center">包括觀眾對於影片的評價資料</td>
+<td style="text-align:center">No</td>
+</tr>
+<tr>
+<td style="text-align:center">name.basics.tsv.gz</td>
+<td style="text-align:center">包括電影工作人員包括導演等的相關資料</td>
+<td style="text-align:center">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>如表格所示，今天我們只會用到三個檔案：title.basics.tsv, title.crew.tsv 和 name.basics.tsv。</p>
+<p>今天的分析，是想知道《從前，有個好萊塢 ..》的導演昆丁塔倫提諾，是否有拍片長度變長的趨勢。這個問題來自於光與影的<a href="https://www.facebook.com/lightandshadowcinema/photos/a.953335314676769/2573460669330884">臉書貼文</a>，其中提到一個關鍵是，昆丁塔倫提諾在 2010 年失去了長期合作的剪輯師後，導演的電影皆呈現冗長的傾向。</p>
+<p>分析的流程是：先讀入檔案，找出昆丁塔倫提諾的名字代碼（name.basics.tsv），對應到角色為導演的電影（title.crew.tsv），取出電影的官方公佈時間長（title.basics.tsv），繪製昆丁塔倫提諾導演在執導期間的所有片長時間。
+</p>
+<p class="more"><a href="2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html">Read more…</a></p>
+</div>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Rene Wang
+
+        on
+                <a href="../categories/technology.html">#Technology</a>,
+
+        <time class="post-date" datetime="2018-08-31T12:00:00+08:00">
+            2018-08-31 12:00
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html">[PyCon 2017] 歡樂學 Python 位元組碼(byte code)</a></h2>
     </header><section class="post-excerpt"><div class="cell border-box-sizing text_cell rendered">
 
 <div class="inner_cell">
@@ -115,6 +183,12 @@
 <div class="input">
 
 <div class="inner_cell">
+
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
 
 </div>
 </div>
@@ -662,42 +736,12 @@ Coursera Mining Massive Datasets course (Ch 3-1, 3-2 and some sections from 3-5)
 
         <time class="post-date" datetime="2014-04-24T18:13:00+08:00">
             2014-04-24 18:13
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="2014/04/12/taiwan-yu-ping-peng-cao-ping-shui-xiang-feng.html">[Taiwan] 與萍蓬草萍水相逢</a></h2>
-    </header><section class="post-excerpt"><div dir="ltr" style="text-align:left;">
-<div dir="ltr" style="text-align:left;">
-<div dir="ltr" style="text-align:left;">
-<div dir="ltr" style="text-align:left;">
-<div dir="ltr" style="text-align:left;">
-<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;"><tbody>
-<tr>
-<td style="text-align:center;"><a href="https://www.flickr.com/photos/renewangsl/13781025124" title="Yellow-Water-Lily-08289.jpg by Rene Wang, on Flickr"><img alt="Yellow-Water-Lily-08289.jpg" height="425" src="http://farm8.static.flickr.com/7390/13781025124_b6cd2db57c_z.jpg" width="640"></a></td>
-</tr>
-<tr>
-<td class="tr-caption" style="text-align:center;"><span style="font-size:small;">這是什麼花呢？</span></td>
-</tr>
-</tbody></table>
-<p><span style="color:purple;float:left;font-size:50px;line-height:55px;margin:5px 7px 0 0;">近</span>日來，在龍潭腳踏車步道與客家文化館旁，都可以看到像荷花池的小池塘裡，開地不是大而華貴的蓮花，而是這樣小而嬌嫩的黃花。本來經過時，都小黃荷花，小黃荷花這樣親切的叫著，直到有一天爸爸看到小黃荷花的照片，興奮的告訴我們，這些小黃荷花正是臺灣特有的萍蓬草，因為瀕臨絕種，所以很難在其他地方看到。<br></p>
-<p class="more"><a href="2014/04/12/taiwan-yu-ping-peng-cao-ping-shui-xiang-feng.html">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </section><footer class="post-meta">
-                Rene Wang
-
-        on
-                <a href="../categories/taiwan.html">#Taiwan</a>,
-                <a href="../categories/travel.html">#Travel</a>,
-
-        <time class="post-date" datetime="2014-04-12T00:24:00+08:00">
-            2014-04-12 00:24
         </time></footer></article>
 </div>
 
         <nav class="postindexpager"><ul class="pager">
 <li class="next">
-                <a href="index-16.html" rel="next">Older posts</a>
+                <a href="index-14.html" rel="next">Older posts</a>
             </li>
         </ul></nav><script>var disqus_shortname="renewangritte";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
  MathJax.Hub.Config({
@@ -711,7 +755,7 @@ Coursera Mining Massive Datasets course (Ch 3-1, 3-2 and some sections from 3-5)
          styles: {'.MathJax_Display': {"margin": 0}}
      }
  });
- </script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2018         <a href="mailto:renewangtw@gmail.com">Rene Wang</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+ </script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:renewangtw@gmail.com">Rene Wang</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
 <img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a></section></footer>
 </div>
