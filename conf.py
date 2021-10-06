@@ -132,7 +132,7 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/land_of_plenty/", "Land Of Plenty"),
+        ("https://renewang.github.io/land_of_plenty/", "Land Of Plenty"),
         ("/blog/", "Life in Mandarin"),
         ("/blog/archive.html", "Archive"),
     ),
@@ -549,7 +549,7 @@ REDIRECTIONS = []
 # https://getnikola.com/handbook.html#deploying-to-github
 # For user.github.io OR organization.github.io pages, the DEPLOY branch
 # MUST be 'master', and 'gh-pages' for other repositories.
-GITHUB_SOURCE_BRANCH = 'master'
+GITHUB_SOURCE_BRANCH = 'src'
 GITHUB_DEPLOY_BRANCH = 'master'
 
 # The name of the remote where you wish to push to, using github_deploy.
@@ -987,12 +987,14 @@ class InputCellHider(Preprocessor):
         except ValueError as e:
           pass
         if is_ignore >= 0:
-            del cell['source']
+            #del cell['source']
+            cell['source'] = ""
     return cell, resources
 
 IPYNB_CONFIG = {'Exporter': {'preprocessors': [InputCellHider], 
-                             'template_file': 'post'},
-                'TemplateExporter': {'exclude_input_prompt': True}}
+                            },#'template_file': 'post'},
+                'TemplateExporter': {'exclude_input_prompt': True,
+                                     'exclude_output_prompt': True},}
 # IPYNB_CONFIG = {}
 # With the following example configuration you can use a custom jinja template
 # called `toggle.tpl` which has to be located in your site/blog main folder:
@@ -1157,7 +1159,8 @@ FEED_TEASERS = True
 
 # If you hate "Filenames with Capital Letters and Spaces.md", you should
 # set this to true.
-UNSLUGIFY_TITLES = True
+#UNSLUGIFY_TITLES = True
+FILE_METADATA_UNSLUGIFY_TITLES = True
 
 # Additional metadata that is added to a post when creating a new_post
 # ADDITIONAL_METADATA = {}
