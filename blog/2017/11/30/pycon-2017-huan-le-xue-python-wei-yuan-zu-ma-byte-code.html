@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<html prefix="" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="深入淺出的了解 python 的位元組碼（bytecode）">
@@ -21,7 +21,7 @@
 <link rel="canonical" href="http://renewang.github.io/blog/2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html">
 <!--[if lt IE 9]><script src="../../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Rene Wang">
 <link rel="prev" href="../28/reshma-saujaniqing-jiao-dao-nu-hai-men-yong-gan-er-bu-shi-wan-mei.html" title="[Women in TED] Reshma Saujani：請教導女孩們勇敢而不是完美" type="text/html">
-<link rel="next" href="../../../2019/the_usual_day_for_a_data_analyst_to_analyze_imdb.html" title="資料分析師尋常的一日：分析IMDB 資料" type="text/html">
+<link rel="next" href="../../../2019/the_usual_day_for_a_data_analyst_to_analyze_imdb%20.html" title="資料分析師尋常的一日：分析IMDB 資料 " type="text/html">
 <meta property="og:site_name" content="ReneWangritte">
 <meta property="og:title" content="[PyCon 2017] 歡樂學 Python 位元組碼(byte code)">
 <meta property="og:url" content="http://renewang.github.io/blog/2017/11/30/pycon-2017-huan-le-xue-python-wei-yuan-zu-ma-byte-code.html">
@@ -39,7 +39,7 @@
     </a>
     <ul>
 <li class="nav-opened" role="presentation">
-            <a href="../../../../land_of_plenty/">Land Of Plenty</a>
+            <a href="https://renewang.github.io/land_of_plenty/">Land Of Plenty</a>
         </li>
         <li class="nav-opened" role="presentation">
             <a href="../../../">Life in Mandarin</a>
@@ -64,7 +64,6 @@
                 2017-11-30 19:18
             </time></section></header><section class="post-content"><div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>誰適合閱讀這篇文章：初階到中階 python 基礎的程式設計師，想深入淺出的了解 python 的位元組碼（bytecode）</p>
@@ -80,20 +79,17 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>誠如大家都能琅琅上口的事實，“python 程式裡都是物件”，所以 add 本身是一個 function 物件。至於 add 本身執行的邏輯，我們可以存取 add 物件的 __code__ 屬性而得到已編譯完成的 Code 物件。而名為 add 的 function 物件，所編譯而成的位元組碼，則可以藉由存取其 Code 物件的 co_code 成員而得。其結果以 byte string 表示如下：</p>
@@ -105,21 +101,19 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">add</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_code</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -131,9 +125,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>我們可以利用 list comprehension 把位元組碼轉成十進位的整數來看。不過就算把 byte 翻成整數來看，仍舊是一頭霧水。</p>
@@ -145,21 +138,19 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">add</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_code</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -171,9 +162,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>看來我們需要一個解譯器來為我們翻譯上面神秘的密碼。幸好 python 的開發者們很佛心的提供了 dis 模組。只要 <code>import dis</code> （可別手誤，打成 <code>import this</code>）並呼叫了同名的模組方法，來為我們揭開神秘的面紗。</p>
@@ -185,22 +175,20 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">dis</span>
 <span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt">--></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  2           0 LOAD_FAST                0 (a)
               3 LOAD_FAST                1 (b)
@@ -213,9 +201,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>python 直譯器可以看成一個利用堆疊（stack）來實踐位元組碼執行的虛擬機器，其作用方式和真實的中央處理單元（CPU）很相像，只不過是用軟體去提取並執行 python 直譯器定義的位元組碼，而非與作業系統和硬體相依的機械碼。所以 dis.dis 的輸出可以看成是一個位元組碼執行狀態的歷程。這個輸出總共有六個欄位：</p>
@@ -230,25 +217,23 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_png output_subarea output_execute_result">
-<img src="data:image/png;base64,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">
+<img src="data:image/png;base64,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" alt="BINARY_ADD 示意圖">
 </div>
 
 </div>
@@ -256,9 +241,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>我們可以看更多的例子，以下是另外一個解譯器對 <code>add_with_assign</code> function 物件的輸出，可以看到因為原始碼有兩行，我們可以看到第一欄多了一個 3，表示是原始碼中第三行或是 <code>return x</code> 程式碼。同時我們也看到了新的位元碼指令：<strong>STORE_FAST</strong>，這個指令則是將新的變數從執行環境推到 python 堆疊裡。</p>
@@ -270,7 +254,6 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_with_assign</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
   <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
@@ -279,16 +262,15 @@
 <span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">add_with_assign</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt">--></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  2           0 LOAD_FAST                0 (a)
               3 LOAD_FAST                1 (b)
@@ -304,9 +286,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>以下的輸出則是包含 if-else 的程式碼，可以看到第二欄出現了 &gt;&gt; 指標，表示若 x &lt;= 0，程式的執行就會跳到 else 的區塊去完成，也就是位元組碼位移為 16 的地方。而更多關於 dis 的程式和更詳盡的 python 位元組碼指令介紹可以參看這篇英文的<a href="https://renewang.github.io/land_of_plenty/posts/learning-cpython-internals-interpreter-and-source-code-overview/">教學文</a>。</p>
@@ -318,7 +299,6 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">abs</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -329,16 +309,15 @@
 <span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt">--></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  2           0 LOAD_FAST                0 (x)
               3 LOAD_CONST               1 (0)
@@ -360,9 +339,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>不過，既然位元組碼是屬於 Code 物件的一部分，那麼是否我們能直接用 Code 物件來建立同樣功能的 function 呢？演講中提供了一個方法，直接用 types 模組中 CodeType 來建構一個 Code 物件。這個 Code 物件可以完成和 addone function 相同的功能。先來看看 dis 對 addone function 的解譯。</p>
@@ -374,7 +352,6 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">addone</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
@@ -382,16 +359,15 @@
 <span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">addone</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt">--></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  2           0 LOAD_FAST                0 (x)
               3 LOAD_CONST               1 (1)
@@ -404,9 +380,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>CodeType 需要一些特別的參數，這些參數大致上可以從以下原始碼旁的註解知道他們的用途。不過還是在這裡做一個快速介紹：前兩個 CodeType 的引數是傳入要建構的 Code 物件的引數數目，和 keyword 引數的引數數目，因為 <code>addone</code> function 只有一個引數 <code>x</code> 且沒有 keyword 引數，所以分別傳入 1 和 0 即可。同時，在變數名稱上要記得給定一個 tuple 物件，裡面裝的就是引數的變數名稱。其次，因為在 <code>addone</code> function 的作用域（scope）裡雖然並沒有任何變數被宣告，只有傳入的引數，<code>x</code>，所以在局部變數（local variable）的數目，我們一樣要填 1。</p>
@@ -421,10 +396,9 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">types</span> <span class="k">import</span> <span class="n">CodeType</span>
-<span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">CO_OPTIMIZED</span><span class="p">,</span> <span class="n">CO_NEWLOCALS</span><span class="p">,</span> <span class="n">CO_NOFREE</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">CodeType</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">CO_OPTIMIZED</span><span class="p">,</span> <span class="n">CO_NEWLOCALS</span><span class="p">,</span> <span class="n">CO_NOFREE</span>
 
 
 <span class="n">my_code</span> <span class="o">=</span> <span class="n">CodeType</span><span class="p">(</span>
@@ -457,14 +431,12 @@
          <span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>完成了 Code object 的建構，我們還需要 function 物件好讓 user 可以傳入數值並呼叫 function。我們需要的是 types 模組的 FunctionType 類別。在建構 FunctionType 時，第二個引數，需要傳入全域區域的變數，在此處傳入一個空的 dict 物件即可。</p>
@@ -476,23 +448,21 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">types</span> <span class="k">import</span> <span class="n">FunctionType</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">FunctionType</span>
 <span class="n">my_addone</span> <span class="o">=</span> <span class="n">FunctionType</span><span class="p">(</span><span class="n">my_code</span><span class="p">,</span> <span class="p">{})</span>
 <span class="n">my_addone</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -504,9 +474,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>看來，我們用 CodeType 建構出來的 Code 物件的確能作用呢！不過，來比較一下由 CodeType 建構出來的 Code 物件和 python 產生的 Code 物件解譯後有什麼不同吧！眼尖的讀者會發現第二個位元組碼指令 <strong>LOAD_CONST</strong> 的引數索引值，python 產生的 addone code 物件是由 1 開始，而不是我們給的 0。</p>
@@ -518,21 +487,19 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">my_addone</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt">--></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre> 42           0 LOAD_FAST                0 (x)
               3 LOAD_CONST               0 (1)
@@ -545,9 +512,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>來看看 python 產生的 Code 物件所編譯的位元組碼，和我們依照講者的指示輸入的位元組碼有什麼不同？</p>
@@ -559,21 +525,19 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">addone</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_code</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -585,9 +549,8 @@
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>我們會發現，講者的指示輸入的位元組碼是：</p>
@@ -607,7 +570,6 @@
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># LOAD_CONST  0 (1) in my_code object</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">my_addone</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_filename</span><span class="p">,</span> 
@@ -619,16 +581,15 @@
       <span class="n">addone</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_consts</span><span class="p">)</span> 
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt">--></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;CodeType&gt; co_consts: (1,)
 addone co_consts: (None, 1)
@@ -639,9 +600,8 @@ addone co_consts: (None, 1)
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>接著該是邁向駭客的第一步，讓我們來嘗試用已經建構好的 my_addone 來升級成 my_addtwo。幸運地，兩位演講者們為我們寫了一個簡短的 helper function。我們可以利用這個小幫手輕鬆地將 my_addone 升級成 my_addtwo 而不需要寫任何一行原始碼。這裡要注意的，因為 code 物件裡的屬性都是唯讀的，所以直接對屬性做變更是不被允許的。能夠允許的是，重新建構一個 CodeType 物件，和 FunctionType 物件。</p>
@@ -653,7 +613,6 @@ addone co_consts: (None, 1)
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
   <span class="s2">"a function that performs a functional update on a function"</span>
@@ -677,14 +636,12 @@ addone co_consts: (None, 1)
                       <span class="n">f</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>有了 update function，我們就可以輕鬆置換 consts 為 2</p>
@@ -696,22 +653,20 @@ addone co_consts: (None, 1)
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_addtwo</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">my_addone</span><span class="p">,</span> <span class="n">co_consts</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
 <span class="n">my_addtwo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -723,9 +678,8 @@ addone co_consts: (None, 1)
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Yes！果然變成“加二”啦！接下來是是更高深的置換。把加法換成乘法吧！在這裡，我們需要置換指令，也就是加法指令代碼為 23 的通通把它換成 20 吧！所以我們需要對原來的小幫手 function 做一點加工。在這裡就是取出位元組碼字串，然後利用位元字串方法， <code>replace</code> 來達成。有興趣知道指令對應的整數代碼的讀者，請參看 python 的原始碼樹中 Include/opcode.h 標頭檔。</p>
@@ -737,7 +691,6 @@ addone co_consts: (None, 1)
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_to_mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
   <span class="s2">"a function that performs a functional update on a function"</span>
@@ -747,8 +700,7 @@ addone co_consts: (None, 1)
   <span class="k">return</span> <span class="n">update</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">co_code</span><span class="o">=</span><span class="n">new</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
@@ -757,22 +709,20 @@ addone co_consts: (None, 1)
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_multwo</span> <span class="o">=</span> <span class="n">add_to_mul</span><span class="p">(</span><span class="n">my_addtwo</span><span class="p">)</span>
 <span class="n">my_multwo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -784,9 +734,8 @@ addone co_consts: (None, 1)
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>當然任意置換指令可能會導致不可收拾的結果，比如，倘若我們寫出了一個擁有 26 個引數的 function，並且回傳第 23 個引數，也就是 x，如下：</p>
@@ -798,9 +747,8 @@ addone co_consts: (None, 1)
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">string</span> <span class="k">import</span> <span class="n">ascii_lowercase</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span>
 
 <span class="k">def</span> <span class="nf">get_x</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
   <span class="s2">"a function with 26 local variables"</span>
@@ -809,16 +757,15 @@ addone co_consts: (None, 1)
 <span class="n">get_x</span><span class="p">(</span><span class="o">*</span><span class="n">ascii_lowercase</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -830,9 +777,8 @@ addone co_consts: (None, 1)
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>將 function 物件帶入<code>add_to_mul</code>，出現以下令人出乎人意料的結果：</p>
@@ -844,22 +790,20 @@ addone co_consts: (None, 1)
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_u</span> <span class="o">=</span> <span class="n">add_to_mul</span><span class="p">(</span><span class="n">get_x</span><span class="p">)</span>
 <span class="n">get_u</span><span class="p">(</span><span class="o">*</span><span class="n">ascii_lowercase</span><span class="p">)</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt output_prompt">--></div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -871,9 +815,8 @@ addone co_consts: (None, 1)
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>真糟！本來想取出 x 的 get_x function 卻變成了 "Get yoU"。因為只是對指令代碼做替換，結果造成第 23 個引數被替換成第 20 個引數。我們可以檢查一下位元組碼的整數代碼，看看是不是引數的部分被更動了。的確，位元組碼的第二個位元組從 23 被替換成 20 了！</p>
@@ -885,23 +828,21 @@ addone co_consts: (None, 1)
 <div class="input">
 
 <div class="inner_cell">
-
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'byte code for'</span><span class="p">,</span> <span class="n">get_x</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">get_x</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_code</span><span class="p">))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'byte code for get_u'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">get_u</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_code</span><span class="p">))</span>
 </pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 <div class="output_wrapper">
 <div class="output">
 
+<div class="output_area">
 
-<div class="output_area"><!--<div class="prompt">--></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>byte code for get_x [124, 23, 0, 83]
 byte code for get_u [124, 20, 0, 83]
@@ -912,9 +853,8 @@ byte code for get_u [124, 20, 0, 83]
 </div>
 </div>
 
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
-
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>不過這個幽默的例子只是說明了．任意置換指令碼的結果就是讓替換 function 做出出乎意料的事呀！更糟的是可能讓你的 python 直譯器 crash 。</p>
@@ -952,7 +892,7 @@ byte code for get_u [124, 20, 0, 83]
     <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
  MathJax.Hub.Config({
      tex2jax: {
          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -964,7 +904,7 @@ byte code for get_u [124, 20, 0, 83]
          styles: {'.MathJax_Display': {"margin": 0}}
      }
  });
- </script></footer></article><script>var disqus_shortname="renewangritte";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:renewangtw@gmail.com">Rene Wang</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+ </script></footer></article><script>var disqus_shortname="renewangritte";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2021         <a href="mailto:renewangtw@gmail.com">Rene Wang</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
 <img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a></section></footer>
 </div>
